@@ -29,7 +29,7 @@ export class Pagination extends PageElement {
   createCards() {
     console.log(this.arrayIndexes)
     this.setViewControls();
-    let cardList = [];
+    const cardList = [];
     if (this.isDouble) {
       for (let i = 0; i < this.cardQuantity; i++) {
         cardList.push(new Card(this.paginationPetsDouble.node, 'card', this.arrayIndexes[i + this.offset]))
@@ -121,7 +121,7 @@ class Controls extends PageElement {
     };
     this.parentInstance = parentInstance;
 
-    for (let control in this.listControls) {
+    for (const control in this.listControls) {
       this.listControls[control].node.onclick = () => {
         this.parentInstance.onChange(control);
         this.handleChange(control);
@@ -130,8 +130,8 @@ class Controls extends PageElement {
   }
 
   handleChange(key) {
-    let currentPage = this.listControls.currentPage.node;
-    let numberPage = +this.listControls.currentPage.node.textContent;
+    const currentPage = this.listControls.currentPage.node;
+    const numberPage = +this.listControls.currentPage.node.textContent;
     switch (key) {
       case 'leftScroll':
         currentPage.textContent = '1';
@@ -146,7 +146,7 @@ class Controls extends PageElement {
         this.setViewControls();
         break;
       case 'rightScroll':
-        let pageQuantity = this.getpageQuantity();
+        const pageQuantity = this.getpageQuantity();
         currentPage.textContent = `${pageQuantity}`;
         this.setViewControls();
         break;
@@ -155,11 +155,11 @@ class Controls extends PageElement {
   
 
   setViewControls() {
-    let currentPage = this.listControls.currentPage.node;
-    let rightScroll = this.listControls.rightScroll.node;
-    let leftScroll = this.listControls.leftScroll.node;
-    let prev = this.listControls.prev.node;
-    let next = this.listControls.next.node;
+    const currentPage = this.listControls.currentPage.node;
+    const rightScroll = this.listControls.rightScroll.node;
+    const leftScroll = this.listControls.leftScroll.node;
+    const prev = this.listControls.prev.node;
+    const next = this.listControls.next.node;
 
     currentPage.style.pointerEvents = 'none';
     currentPage.classList.add('active');
@@ -172,7 +172,7 @@ class Controls extends PageElement {
       prev.classList.remove('inactive');
     }
 
-    let pageQuantity = this.getpageQuantity();
+    const pageQuantity = this.getpageQuantity();
     if (currentPage.textContent === `${pageQuantity}`) {
       rightScroll.classList.add('inactive');
       next.classList.add('inactive');
@@ -184,7 +184,7 @@ class Controls extends PageElement {
 
   setpageQuantity(pageQuantity) {
     this.pageQuantity = pageQuantity
-    let currentPage = this.listControls.currentPage.node;
+    const currentPage = this.listControls.currentPage.node;
     currentPage.textContent = '1';
     this.setViewControls();
   }

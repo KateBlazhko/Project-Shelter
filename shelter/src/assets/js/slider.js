@@ -51,15 +51,15 @@ export class Slider extends PageElement {
 
   
 
-      let slide = this.slideList[this.indexVisibleSlide]
+      const slide = this.slideList[this.indexVisibleSlide]
       this.createCards(slide);
       this.translateSlides();
     } 
 
     createCards(slide) {
-      let array = [1, 2, 3, 4, 5, 6, 7, 8];
-      let arrayNew = array.filter(item => !this.indexesVisibleCard.includes(item))
-      let arrayIndexes = myFunc.randomSort(arrayNew);
+      const array = [1, 2, 3, 4, 5, 6, 7, 8];
+      const arrayNew = array.filter(item => !this.indexesVisibleCard.includes(item))
+      const arrayIndexes = myFunc.randomSort(arrayNew);
 
       slide.node.innerHTML = '';
       this.indexesVisibleCard = []
@@ -73,8 +73,8 @@ export class Slider extends PageElement {
 
     translateSlides() {
       this.slideList.forEach((slide, i) => {
-        let delay = this.getDelay(i);
-        let position = this.getPosition(i);
+        const delay = this.getDelay(i);
+        const position = this.getPosition(i);
 
         if (position === 0) {
           slide.node.style.transform = `translate(${position * 100}%)`;
@@ -148,7 +148,7 @@ export class Slider extends PageElement {
     }
 
     getDelay(i) {
-      let delay = this.delay
+      const delay = this.delay
 
       if (this.isPrev) {
         if (i === this.indexMovedSlide - 1) {
@@ -163,7 +163,7 @@ export class Slider extends PageElement {
     }
 
     getPosition(i) {
-      let position = 0;
+      const position = 0;
         if ((i + this.offset) < this.slideList.length) {
           position = i + this.offset
         }
