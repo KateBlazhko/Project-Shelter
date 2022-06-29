@@ -148,7 +148,7 @@ export class Slider extends PageElement {
     }
 
     getDelay(i) {
-      const delay = this.delay
+      let delay = this.delay
 
       if (this.isPrev) {
         if (i === this.indexMovedSlide - 1) {
@@ -163,7 +163,7 @@ export class Slider extends PageElement {
     }
 
     getPosition(i) {
-      const position = 0;
+      let position = 0;
         if ((i + this.offset) < this.slideList.length) {
           position = i + this.offset
         }

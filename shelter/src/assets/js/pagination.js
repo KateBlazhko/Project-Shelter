@@ -1,5 +1,6 @@
 import {PageElement} from './page-element';
 import {Card} from './card';
+import * as myFunc from './function';
 
 export class Pagination extends PageElement {
   constructor(parent, className, cardQuantity, arrayIndexes) {
@@ -197,4 +198,54 @@ class Controls extends PageElement {
     return this.listControls
   }
 }
+
+export class PaginationModel {
+  constructor() {
+    this.cardQuantity = this.getcardQuantity();
+    this.arrayIndexes = this.getArray();
+    this.paginationPets = new Pagination(contentSlider, 'pagination', this.cardQuantity, this.arrayIndexes);
+
+    this.resizeTimeout = null;
+    window.addEventListener('resize', () => {
+      if (!this.resizeTimeout) {
+        this.resizeTimeout = setTimeout(() => {
+          const newCardQuantity = this.getcardQuantity();
+          if (newCardQuantity !== this.cardQuantity) {
+            this.cardQuantity = newCardQuantity
+            this.arrayIndexes = this.getArray();
+            this.paginationPets.resizePagination(this.cardQuantity, this.arrayIndexes);
+          }
+          this.resizeTimeout = null;
+        }, 66)
+
+      }
+    })
+  }
+
+  getcardQuantity(){
+    return (window.innerWidth >= 1280) ? 8 :
+           (window.innerWidth >= 768) ? 6 : 3
+  }
+
+  getArray() {
+    const arrayPages = []
+  
+    for (let i = 1; i <= 6; i++) {
+      const arrayCards = [];
+
+      for (let j = 1; j <= 8; j++) {
+        arrayCards.push(j);
+      }
+
+      myFunc.randomSort(arrayCards);
+  
+      arrayPages.push(...arrayCards);
+    }
+  
+    return myFunc.checkArr(arrayPages, this.cardQuantity)
+  }
+}
+
+const contentSlider = document.querySelector('.pets-content');
+
 
